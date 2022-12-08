@@ -110,12 +110,12 @@ body {
   border-right: 1px solid #9cadf2;
 }
 .error {
-  /* height: 5px; */
   color: red;
   font-size: 12px;
   font-weight: 600;
   margin-top: -1em;
 }
+
 @media screen and (max-width: 600px) {
   .content {
     margin: 0em;

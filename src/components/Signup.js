@@ -17,6 +17,9 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  // Button text state
+  const [btnTxt, setBtnTxt] = useState(false);
+
   // For redirecting to the success page
   const navigate = useNavigate();
 
@@ -36,9 +39,11 @@ const Signup = () => {
       setUsernameError(
         "Username must consist of 5 to 15 characters, only letters and numbers are allowed, with no numbers at the beginning or the end"
       );
+      setBtnTxt(false);
       return false;
     } else if (!emailRegExp.test(email)) {
       setEmailError("Invalid Email Address");
+      setBtnTxt(false);
       return false;
     } else {
       return true;
@@ -60,6 +65,7 @@ const Signup = () => {
 
   // Function for submitting the signup form
   const handleSubmit = (e) => {
+    setBtnTxt(true);
     // Prevent default form submission
     e.preventDefault();
 
@@ -102,10 +108,12 @@ const Signup = () => {
                 }
               });
             }
+            setBtnTxt(false);
           } else {
             // set user data in localstorage
             localStorage.setItem("userData", JSON.stringify(data));
             console.log("success");
+            setBtnTxt(false);
 
             // Redirect to success page after successful signup
             navigate("/success");
@@ -114,6 +122,7 @@ const Signup = () => {
         })
         .catch((error) => {
           // Log errors from the request
+          setBtnTxt(false);
           console.log("Error: " + error);
           return;
         });
@@ -175,7 +184,7 @@ const Signup = () => {
           </div>
           <div className="input-container">
             <button type="submit" className="signup-btn">
-              Create Account
+              {btnTxt ? "Submitting..." : "Create Account"}
             </button>
           </div>
         </form>
