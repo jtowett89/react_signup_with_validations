@@ -1,38 +1,221 @@
-.App {
-  text-align: center;
+@import url("https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900;1,1000&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+html,
+body {
+  font-family: "Mulish", sans-serif;
+  overflow-x: hidden;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+#root {
+  width: 100vw;
+  height: 100vh;
 }
-
-.App-header {
-  background-color: #282c34;
+.main {
+  width: 100vw;
   min-height: 100vh;
+  background: linear-gradient(to bottom right, #e8b5bd 0%, #bbc9f4 100%) 100%
+    no-repeat;
+  display: block;
+  overflow-y: scroll;
+}
+.content {
+  margin: 10em auto;
+  position: relative;
+  display: flex;
+  padding: 60px;
+  background-color: #f3ecf5;
+  border-radius: 10px;
+  width: 1200px;
+  height: auto;
+}
+.content h1 {
+  font-size: 56px;
+  line-height: 120%;
+}
+.content h2 {
+  font-size: 42px;
+  line-height: 50.4px;
+}
+.content p {
+  font-size: 24px;
+  font-weight: 400;
+  color: #1f1249;
+  line-height: 160%;
+  margin-top: 1.5em;
+}
+.content input {
+  height: 60px;
+  font-size: 1em;
+  font-weight: 400;
+  padding: 1em;
+  padding-left: 5em;
+  text-align: left;
+  border-radius: 10px;
+  border: 1px solid #dbe3ff;
+  background: #fff;
+  width: 100%;
+  margin: 1em 0;
+}
+.welcomeImg {
+  width: 100%;
+}
+.imgContainer {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  float: left;
+}
+.content-inner {
+  padding: 60px;
+  padding-right: 0;
+  width: 50%;
+  float: left;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
-
-.App-link {
-  color: #61dafb;
+.signup-btn {
+  background: linear-gradient(113.87deg, #2663df 14.81%, #758ff0 88.76%);
+  box-shadow: 0px 6px 18px #9cadf2;
+  border-radius: 10px;
+  padding: 1em 2em;
+  height: 60px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  text-decoration: none !important;
+  text-align: center;
+  font-weight: 700;
+  font-size: 16px;
+  margin-top: 2.5em;
+  border: none;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.input-container {
+  width: 100%;
+  position: relative;
+}
+.input-icon {
+  position: absolute;
+  top: 40px;
+  left: 2em;
+  color: #9cadf2;
+  padding-right: 1em;
+  border-right: 1px solid #9cadf2;
+}
+.error {
+  /* height: 5px; */
+  color: red;
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: -1em;
+}
+@media screen and (max-width: 600px) {
+  .content {
+    margin: 0em;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 2empx;
+    background-color: #f3ecf5;
+    border-radius: 0px;
+    width: 100vw;
+    min-height: 100vh;
   }
-  to {
-    transform: rotate(360deg);
+  .content h1 {
+    font-size: 42px;
+    line-height: 120%;
+    text-align: center;
+  }
+  .content h2 {
+    font-size: 32px;
+    line-height: 50.4px;
+    text-align: center;
+  }
+  .content p {
+    font-size: 16px;
+    font-weight: 400;
+    color: #1f1249;
+    line-height: 160%;
+    margin-top: 1.5em;
+    text-align: center;
+  }
+  .content input {
+    height: 60px;
+    font-size: 1em;
+    font-weight: 400;
+    padding: 1em;
+    padding-left: 5em;
+    text-align: left;
+    border-radius: 10px;
+    border: 1px solid #dbe3ff;
+    background: #fff;
+    width: 100%;
+    margin: 1em 0;
+  }
+  .welcomeImg {
+    width: 100%;
+  }
+  .imgContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    float: left;
+    margin-bottom: 3em;
+  }
+  .content-inner {
+    padding: 0px;
+    padding-right: 0;
+    width: 100%;
+    float: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .signup-btn {
+    background: linear-gradient(113.87deg, #2663df 14.81%, #758ff0 88.76%);
+    box-shadow: 0px 6px 18px #9cadf2;
+    border-radius: 10px;
+    padding: 1em 2em;
+    height: 60px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    text-decoration: none !important;
+    text-align: center;
+    font-weight: 700;
+    font-size: 16px;
+    margin-top: 2.5em;
+    border: none;
+    cursor: pointer;
+  }
+  .input-container {
+    width: 100%;
+    position: relative;
+  }
+  .input-icon {
+    position: absolute;
+    top: 40px;
+    left: 2em;
+    color: #9cadf2;
+    padding-right: 1em;
+    border-right: 1px solid #9cadf2;
+  }
+  .error {
+    /* height: 5px; */
+    color: red;
+    font-size: 12px;
+    font-weight: 600;
+    margin-top: -1em;
   }
 }

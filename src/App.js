@@ -1,23 +1,61 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Skeleton from "@mui/material/Skeleton";
+import React, { Suspense } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+const Welcome = React.lazy(() => import("./components/Welcome"));
+const Signup = React.lazy(() => import("./components/Signup"));
+const Success = React.lazy(() => import("./components/Success"));
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="main">
+      <Router>
+        <Routes>
+          <Route
+            path="/"
+            exact
+            element={
+              <Suspense
+                fallback={
+                  <div className="content">
+                    <Skeleton variant="rectangular" width={1200} height={400} />
+                  </div>
+                }
+              >
+                <Welcome />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/signup"
+            element={
+              <Suspense
+                fallback={
+                  <div className="content">
+                    <Skeleton variant="rectangular" width={1200} height={400} />
+                  </div>
+                }
+              >
+                <Signup />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/success"
+            element={
+              <Suspense
+                fallback={
+                  <div className="content">
+                    <Skeleton variant="rectangular" width={1200} height={400} />
+                  </div>
+                }
+              >
+                <Success />
+              </Suspense>
+            }
+          />
+        </Routes>
+      </Router>
     </div>
   );
 }
