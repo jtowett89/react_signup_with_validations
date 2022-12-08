@@ -8,7 +8,7 @@ const Welcome = () => {
     if (userData) {
       localStorage.removeItem("userData");
     }
-  }, []);
+  }, [userData]);
   return (
     <div className="content">
       <div className="imgContainer">
