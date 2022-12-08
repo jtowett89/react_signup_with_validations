@@ -20,6 +20,31 @@ const Signup = () => {
   // For redirecting to the success page
   const navigate = useNavigate();
 
+  // Validate email address and username
+  const validateInputs = (username, email) => {
+    let numberRexExp = /^\d+$/;
+    let specialCharRexExp = /[^A-Za-z0-9]/g;
+    let emailRegExp =
+      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (
+      username.length < 5 ||
+      username.length > 15 ||
+      numberRexExp.test(username.charAt(0)) ||
+      numberRexExp.test(username.charAt(username.length - 1)) ||
+      specialCharRexExp.test(username)
+    ) {
+      setUsernameError(
+        "Username must consist of 5 to 15 characters, only letters and numbers are allowed, with no numbers at the beginning or the end"
+      );
+      return false;
+    } else if (!emailRegExp.test(email)) {
+      setEmailError("Invalid Email Address");
+      return false;
+    } else {
+      return true;
+    }
+  };
+
   // Function for handling input field changes
   const handleChange = (e) => {
     if (e.target.name === "username") {
@@ -44,53 +69,57 @@ const Signup = () => {
     setPasswordError(null);
     setConfirmPasswordError(null);
 
-    // Post data to endpoint
-    fetch("https://goldblv.com/api/hiring/tasks/register", {
-      method: "POST",
-      body: JSON.stringify({
-        username: username,
-        email: email,
-        password: password,
-        password_confirmation: confirmPassword
-      }),
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      }
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        // Check if there are errors in the input fields and render errors appropriately
-        if (data.errors) {
-          if (data.errors.username) {
-            setUsernameError(data.errors.username);
-          } else if (data.errors.email) {
-            setEmailError(data.errors.email);
-          } else if (data.errors.password) {
-            // Loop over the password erros array then update the necessary state
-            data.errors.password.map((error) => {
-              if (error === "The password confirmation does not match.") {
-                setConfirmPasswordError(error);
-              } else {
-                setPasswordError(error);
-              }
-            });
-          }
-        } else {
-          // set user data in localstorage
-          localStorage.setItem("userData", JSON.stringify(data));
-          console.log("success");
-
-          // Redirect to success page after successful signup
-          navigate("/success");
+    if (validateInputs(username, email)) {
+      // Post data to endpoint
+      fetch("https://goldblv.com/api/hiring/tasks/register", {
+        method: "POST",
+        body: JSON.stringify({
+          username: username,
+          email: email,
+          password: password,
+          password_confirmation: confirmPassword
+        }),
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
         }
-        return;
       })
-      .catch((error) => {
-        // Log errors from the request
-        console.log("Error: " + error);
-        return;
-      });
+        .then((response) => response.json())
+        .then((data) => {
+          // Check if there are errors in the input fields and render errors appropriately
+          if (data.errors) {
+            if (data.errors.username) {
+              setUsernameError(data.errors.username);
+            } else if (data.errors.email) {
+              setEmailError(data.errors.email);
+            } else if (data.errors.password) {
+              // Loop over the password erros array then update the necessary state
+              data.errors.password.map((error) => {
+                if (error === "The password confirmation does not match.") {
+                  setConfirmPasswordError(error);
+                } else {
+                  setPasswordError(error);
+                }
+              });
+            }
+          } else {
+            // set user data in localstorage
+            localStorage.setItem("userData", JSON.stringify(data));
+            console.log("success");
+
+            // Redirect to success page after successful signup
+            navigate("/success");
+          }
+          return;
+        })
+        .catch((error) => {
+          // Log errors from the request
+          console.log("Error: " + error);
+          return;
+        });
+    } else {
+      return;
+    }
   };
 
   return (
