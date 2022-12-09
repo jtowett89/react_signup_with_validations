@@ -18,7 +18,11 @@ function App() {
               <Suspense
                 fallback={
                   <div className="content">
-                    <Skeleton variant="rectangular" width={1200} height={400} />
+                    <Skeleton
+                      variant="rectangular"
+                      width={"100%"}
+                      height={"30em"}
+                    />
                   </div>
                 }
               >
@@ -32,7 +36,11 @@ function App() {
               <Suspense
                 fallback={
                   <div className="content">
-                    <Skeleton variant="rectangular" width={1200} height={400} />
+                    <Skeleton
+                      variant="rectangular"
+                      width={"100%"}
+                      height={"30em"}
+                    />
                   </div>
                 }
               >
@@ -46,7 +54,11 @@ function App() {
               <Suspense
                 fallback={
                   <div className="content">
-                    <Skeleton variant="rectangular" width={1200} height={400} />
+                    <Skeleton
+                      variant="rectangular"
+                      width={"100%"}
+                      height={"30em"}
+                    />
                   </div>
                 }
               >
