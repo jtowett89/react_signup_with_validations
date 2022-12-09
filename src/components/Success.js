@@ -13,7 +13,7 @@ const Success = () => {
     if (userData === "") {
       navigate("/");
     }
-  }, [userData]);
+  }, [userData, navigate]);
 
   return (
     <div className="content">
