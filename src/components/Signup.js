@@ -102,9 +102,9 @@ const Signup = () => {
               // Loop over the password erros array then update the necessary state
               data.errors.password.map((error) => {
                 if (error === "The password confirmation does not match.") {
-                  setConfirmPasswordError(error);
+                  return setConfirmPasswordError(error);
                 } else {
-                  setPasswordError(error);
+                  return setPasswordError(error);
                 }
               });
             }
