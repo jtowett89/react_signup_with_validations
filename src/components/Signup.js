@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import signupImg from "../images/signup.png";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock, faUser, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import Input from "./Input";
 
 const Signup = () => {
   // Error States
@@ -66,7 +66,7 @@ const Signup = () => {
   // Function for submitting the signup form
   const handleSubmit = (e) => {
     setBtnTxt(true);
-    // Prevent default form submission
+    // Pre default form submission
     e.preventDefault();
 
     //Reset all errors on form submission
@@ -104,11 +104,6 @@ const Signup = () => {
                 return error === "The password confirmation does not match."
                   ? setConfirmPasswordError(error)
                   : setPasswordError(error);
-                // if (error === "The password confirmation does not match.") {
-                //   return setConfirmPasswordError(error);
-                // } else {
-                //   return setPasswordError(error);
-                // }
               });
             }
             setBtnTxt(false);
@@ -134,6 +129,45 @@ const Signup = () => {
     }
   };
 
+  const inputsData = [
+    {
+      name: "username",
+      type: "text",
+      icon: faUser,
+      change: handleChange,
+      placeholder: "Username",
+      value: username,
+      errors: usernameError
+    },
+    {
+      name: "email",
+      type: "email",
+      icon: faEnvelope,
+      change: handleChange,
+      placeholder: "Email",
+      value: email,
+      errors: emailError
+    },
+    {
+      name: "password",
+      type: "password",
+      icon: faLock,
+      change: handleChange,
+      placeholder: "Password",
+      value: password,
+      errors: passwordError
+    },
+    {
+      name: "confirm_password",
+      type: "password",
+      icon: faLock,
+      change: handleChange,
+      placeholder: "Confirm Password",
+      value: confirmPassword,
+      errors: confirmPasswordError
+    }
+  ];
+
   return (
     <div className="content">
       <div className="imgContainer">
@@ -143,48 +177,9 @@ const Signup = () => {
         <h2>Create Account</h2>
         <p>Go ahead and sign up, let everyone know how awesome you are!</p>
         <form onSubmit={handleSubmit}>
-          <div className="input-container">
-            <FontAwesomeIcon icon={faUser} className="input-icon" />
-            <input
-              onChange={handleChange}
-              name="username"
-              placeholder="Username"
-              value={username}
-            />
-            <div className="error">{usernameError}</div>
-          </div>
-          <div className="input-container">
-            <FontAwesomeIcon icon={faEnvelope} className="input-icon" />
-            <input
-              onChange={handleChange}
-              name="email"
-              placeholder="Email"
-              value={email}
-            />
-            <div className="error">{emailError}</div>
-          </div>
-          <div className="input-container">
-            <FontAwesomeIcon icon={faLock} className="input-icon" />
-            <input
-              onChange={handleChange}
-              name="password"
-              placeholder="Password"
-              value={password}
-              type="password"
-            />
-            <div className="error">{passwordError}</div>
-          </div>
-          <div className="input-container">
-            <FontAwesomeIcon icon={faLock} className="input-icon" />
-            <input
-              onChange={handleChange}
-              name="confirm_password"
-              placeholder="Confirm Password"
-              value={confirmPassword}
-              type="password"
-            />
-            <div className="error">{confirmPasswordError}</div>
-          </div>
+          {inputsData.map((input, index) => (
+            <Input key={index} data={input} />
+          ))}
           <div className="input-container">
             <button type="submit" className="signup-btn">
               {btnTxt ? "Submitting..." : "Create Account"}
