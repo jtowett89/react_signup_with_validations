@@ -7,65 +7,38 @@ const Signup = React.lazy(() => import("./components/Signup"));
 const Success = React.lazy(() => import("./components/Success"));
 
 function App() {
+  const routesData = [
+    { path: "/", component: <Welcome /> },
+    { path: "/signup", component: <Signup /> },
+    { path: "/success", component: <Success /> }
+  ];
   return (
     <div className="main">
       <Router>
         <Routes>
-          <Route
-            path="/"
-            exact
-            element={
-              <Suspense
-                fallback={
-                  <div className="content">
-                    <Skeleton
-                      variant="rectangular"
-                      width={"100%"}
-                      height={"30em"}
-                    />
-                  </div>
+          {routesData.map((data, index) => {
+            return (
+              <Route
+                key={index}
+                path={data.path}
+                element={
+                  <Suspense
+                    fallback={
+                      <div className="content">
+                        <Skeleton
+                          variant="rectangular"
+                          width={"100%"}
+                          height={"30em"}
+                        />
+                      </div>
+                    }
+                  >
+                    {data.component}
+                  </Suspense>
                 }
-              >
-                <Welcome />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/signup"
-            element={
-              <Suspense
-                fallback={
-                  <div className="content">
-                    <Skeleton
-                      variant="rectangular"
-                      width={"100%"}
-                      height={"30em"}
-                    />
-                  </div>
-                }
-              >
-                <Signup />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/success"
-            element={
-              <Suspense
-                fallback={
-                  <div className="content">
-                    <Skeleton
-                      variant="rectangular"
-                      width={"100%"}
-                      height={"30em"}
-                    />
-                  </div>
-                }
-              >
-                <Success />
-              </Suspense>
-            }
-          />
+              />
+            );
+          })}
         </Routes>
       </Router>
     </div>
