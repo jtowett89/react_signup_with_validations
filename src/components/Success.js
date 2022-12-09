@@ -5,7 +5,10 @@ import successImg from "../images/success.png";
 const Success = () => {
   const storedData = localStorage.getItem("userData");
   const userData = storedData ? JSON.parse(storedData) : "";
+
+  // For redirecting to root path if there is no user data in localStorage
   const navigate = useNavigate();
+
   useEffect(() => {
     if (userData === "") {
       navigate("/");
