@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import successImg from "../images/success.png";
 
 const Success = () => {
-  const userData = JSON.parse(localStorage.getItem("userData"));
+  const storedData = localStorage.getItem("userData");
+  const userData = storedData ? JSON.parse(storedData) : "";
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (userData === "") {
+      navigate("/");
+    }
+  }, [userData]);
+
   return (
     <div className="content">
       <div className="imgContainer">
