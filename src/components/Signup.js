@@ -101,11 +101,14 @@ const Signup = () => {
             } else if (data.errors.password) {
               // Loop over the password erros array then update the necessary state
               data.errors.password.map((error) => {
-                if (error === "The password confirmation does not match.") {
-                  return setConfirmPasswordError(error);
-                } else {
-                  return setPasswordError(error);
-                }
+                return error === "The password confirmation does not match."
+                  ? setConfirmPasswordError(error)
+                  : setPasswordError(error);
+                // if (error === "The password confirmation does not match.") {
+                //   return setConfirmPasswordError(error);
+                // } else {
+                //   return setPasswordError(error);
+                // }
               });
             }
             setBtnTxt(false);
