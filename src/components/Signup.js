@@ -125,6 +125,7 @@ const Signup = () => {
           return;
         });
     } else {
+      setBtnTxt(false);
       return;
     }
   };
