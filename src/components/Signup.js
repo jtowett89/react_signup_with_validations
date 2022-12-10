@@ -66,7 +66,7 @@ const Signup = () => {
   // Function for submitting the signup form
   const handleSubmit = (e) => {
     setBtnTxt(true);
-    // Pre default form submission
+    // Prevent default form submission
     e.preventDefault();
 
     //Reset all errors on form submission
